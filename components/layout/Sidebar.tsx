@@ -16,12 +16,12 @@ import {
 import { cn } from '@/lib/utils';
 
 const NAV_ITEMS = [
-    { label: 'Dashboard', href: '/', icon: LayoutDashboard },
-    { label: 'Investigation', href: '/investigate', icon: Search },
-    { label: 'Endpoints', href: '/endpoints', icon: Monitor },
-    { label: 'Response', href: '/response', icon: ShieldAlert },
-    { label: 'Threat Intel', href: '/intel', icon: Database },
-    { label: 'Settings', href: '/settings', icon: Settings },
+    { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+    { label: 'Investigation', href: '/dashboard/investigate', icon: Search },
+    { label: 'Endpoints', href: '/dashboard/endpoints', icon: Monitor },
+    { label: 'Response', href: '/dashboard/response', icon: ShieldAlert },
+    { label: 'Threat Intel', href: '/dashboard/intel', icon: Database },
+    { label: 'Settings', href: '/dashboard/settings', icon: Settings },
 ];
 
 export const Sidebar: React.FC = () => {
