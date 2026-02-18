@@ -47,6 +47,24 @@ class MockDatabase {
         }
         throw new Error('Threat not found');
     }
+
+    async simulateIncomingThreat() {
+        await delay(100);
+        const newThreat: Threat = {
+            id: `th-${Date.now().toString().slice(-4)}`,
+            type: Math.random() > 0.5 ? 'Ransomware' : 'DDoS',
+            host: `workstation-${Math.floor(Math.random() * 99)}`,
+            status: 'active',
+            severity: Math.random() > 0.7 ? 'critical' : 'high',
+            confidence: Math.round(Math.random() * 20 + 80),
+            detectedAt: new Date().toISOString(),
+            pid: Math.floor(Math.random() * 9000 + 1000),
+            ioc: `192.168.1.${Math.floor(Math.random() * 255)}`
+        };
+        this.threats.unshift(newThreat); // Add to top
+        if (this.threats.length > 50) this.threats.pop(); // Keep list size manageable
+        return newThreat;
+    }
 }
 
 // Singleton instance

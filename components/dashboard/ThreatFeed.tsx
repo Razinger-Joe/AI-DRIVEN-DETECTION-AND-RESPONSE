@@ -5,11 +5,15 @@ import React from 'react';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { NeonBadge } from '@/components/ui/NeonBadge';
 import { PulseDot } from '@/components/ui/PulseDot';
+
 import { Threat } from '@/lib/mock/threats';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
+import { useAppStore } from '@/lib/store';
+import { cn } from '@/lib/utils'; // Assuming cn exists or I'll implement it
 
 export const ThreatFeed: React.FC = () => {
+    const { setSelectedThreatId, selectedThreatId } = useAppStore();
     const { data: threats, isLoading } = useQuery<Threat[]>({
         queryKey: ['threats'],
         queryFn: async () => {
@@ -59,7 +63,11 @@ export const ThreatFeed: React.FC = () => {
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: idx * 0.1 }}
-                                    className="group hover:bg-white/[0.03] transition-colors cursor-pointer"
+                                    onClick={() => setSelectedThreatId(threat.id)}
+                                    className={cn(
+                                        "group hover:bg-white/[0.03] transition-colors cursor-pointer border-l-2 border-transparent",
+                                        selectedThreatId === threat.id ? "bg-white/[0.05] border-cyan-400" : ""
+                                    )}
                                 >
                                     <td className="p-3 pl-4 align-middle">
                                         <div className="flex items-center gap-2">
