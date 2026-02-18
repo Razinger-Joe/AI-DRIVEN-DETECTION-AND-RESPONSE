@@ -5,14 +5,30 @@ import React from 'react';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { NeonBadge } from '@/components/ui/NeonBadge';
 import { PulseDot } from '@/components/ui/PulseDot';
-import { MOCK_THREATS, Threat } from '@/lib/mock/threats';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'; // Will be created by shadcn or manually if not yet
+import { Threat } from '@/lib/mock/threats';
 import { motion, AnimatePresence } from 'framer-motion';
-
-// Temporary fallback for Table components if shadcn not init yet
-const TableFallback = ({ children }: { children: React.ReactNode }) => <div className="w-full text-sm">{children}</div>;
+import { useQuery } from '@tanstack/react-query';
 
 export const ThreatFeed: React.FC = () => {
+    const { data: threats, isLoading } = useQuery<Threat[]>({
+        queryKey: ['threats'],
+        queryFn: async () => {
+            const res = await fetch('/api/threats');
+            if (!res.ok) throw new Error('Failed to fetch threats');
+            return res.json();
+        },
+        refetchInterval: 3000,
+    });
+
+    if (isLoading) {
+        return (
+            <GlassCard className="h-full flex flex-col p-4 items-center justify-center">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400" />
+                <p className="text-xs text-muted-foreground mt-2 font-mono">ESTABLISHING UPLINK...</p>
+            </GlassCard>
+        )
+    }
+
     return (
         <GlassCard className="h-full flex flex-col p-0 overflow-hidden">
             <div className="p-4 border-b border-white/10 flex justify-between items-center bg-white/[0.02]">
@@ -37,7 +53,7 @@ export const ThreatFeed: React.FC = () => {
                     </thead>
                     <tbody className="divide-y divide-white/5">
                         <AnimatePresence>
-                            {MOCK_THREATS.map((threat, idx) => (
+                            {threats?.map((threat, idx) => (
                                 <motion.tr
                                     key={threat.id}
                                     initial={{ opacity: 0, x: -20 }}

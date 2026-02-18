@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { Orbitron, Syne, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
+import { Providers } from "@/components/providers";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -37,14 +37,9 @@ export default function RootLayout({
       <body
         className={`${orbitron.variable} ${syne.variable} ${mono.variable} antialiased bg-background text-foreground overflow-hidden`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <Providers>
           {children}
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

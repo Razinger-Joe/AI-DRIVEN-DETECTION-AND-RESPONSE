@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Threat {
+  id          String   @id @default(uuid())
+  type        String
+  host        String
+  severity    String   // critical, high, medium, low
+  status      String   // active, investigating, resolved
+  confidence  Int
+  ioc         String?
+  detectedAt  DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  meta        String?  // JSON string for extra data
+}
+
+model SystemLog {
+  id        String   @id @default(uuid())
+  level     String   // info, warn, error
+  message   String
+  source    String
+  timestamp DateTime @default(now())
+}
