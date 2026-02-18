@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 222 47% 11%;
+    /* #050a14 */
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+
+  /* Deep Space Dark Theme Overrides */
+  .dark {
+    --background: 222 47% 5%;
+    /* #050a14 darkened slightly */
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 7%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 7%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 186 100% 50%;
+    /* #00e5ff Cyan */
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 265 89% 78%;
+    /* #a78bfa Purple */
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 168 70% 48%;
+    /* #22d3a5 Green */
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 345 100% 61%;
+    /* #ff3b5c Red */
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 186 100% 50%;
+    /* #00e5ff */
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+    border-style: solid;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Custom Utilities based on Design System */
+@layer utilities {
+  .glass-card {
+    background-color: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .text-shadow-glow {
+    text-shadow: 0 0 10px currentColor;
+  }
+
+  .font-orbitron {
+    font-family: var(--font-orbitron);
+  }
+
+  .font-syne {
+    font-family: var(--font-syne);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  /* Grid Background */
+  .bg-grid-cyber {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+  }
+}
