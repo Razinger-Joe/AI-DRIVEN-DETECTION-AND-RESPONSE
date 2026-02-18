@@ -33,8 +33,10 @@ class MockDatabase {
             criticalAlerts: critical,
             highSeverity: high,
             avgConfidence,
-            systemHealth: 94, // Mocked static
-            networkLoad: '845 EPS' // Mocked static
+            systemHealth: 94,
+            networkLoad: '845 EPS',
+            endpointsProtected: 842,
+            threatsContained: this.threats.filter(t => t.status === 'contained' || t.status === 'resolved').length
         };
     }
 
