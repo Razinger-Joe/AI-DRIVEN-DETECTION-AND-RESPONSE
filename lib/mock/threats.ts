@@ -11,7 +11,19 @@ export interface Threat {
   confidence: number;
   detectedAt: string;
   pid: number;
+  meta?: string;
   ioc: string;
+}
+
+export interface StatSummary {
+  activeThreats: number;
+  criticalAlerts: number;
+  highSeverity: number;
+  avgConfidence: number;
+  systemHealth: number;
+  networkLoad: string;
+  endpointsProtected: number;
+  threatsContained: number;
 }
 
 export const MOCK_THREATS: Threat[] = [

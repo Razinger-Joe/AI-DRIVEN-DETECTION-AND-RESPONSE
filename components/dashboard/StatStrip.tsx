@@ -1,19 +1,11 @@
+"use client";
 
 import React from 'react';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Shield, AlertTriangle, Monitor, Lock, Activity } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 
-interface StatSummary {
-    activeThreats: number;
-    criticalAlerts: number;
-    highSeverity: number;
-    avgConfidence: number;
-    systemHealth: number;
-    networkLoad: string;
-    endpointsProtected: number; // Added to match UI
-    threatsContained: number;   // Added to match UI
-}
+import { StatSummary } from '@/lib/mock/threats';
 
 export const StatStrip: React.FC = () => {
     const { data: stats, isLoading } = useQuery<StatSummary>({
@@ -57,7 +49,7 @@ export const StatStrip: React.FC = () => {
                         <p className={`text-2xl font-bold font-orbitron ${stat.color} mt-1 text-shadow-glow`}>{stat.value}</p>
                     </div>
                     <div className="p-2 bg-white/5 rounded-full border border-white/5">
-                        {React.cloneElement(stat.icon as React.ReactElement, { size: 18 })}
+                        {React.cloneElement(stat.icon as React.ReactElement<any>, { size: 18 })}
                     </div>
                 </GlassCard>
             ))}
